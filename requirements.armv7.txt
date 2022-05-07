@@ -1,0 +1,6 @@
+feedparser
+Flask
+sqlitedict
+tweepy
+
+
