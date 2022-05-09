@@ -197,7 +197,7 @@ def score_tweet(tweet):
 
 def weight_tweet(tweet):
     papers = get_papers()
-    weight = 10.0
+    weight = 3.0
     # some tweets are really boring, like an rt
     if "arxiv" in tweet['user_screen_name'].lower():
         weight -= 1
@@ -221,7 +221,6 @@ def weight_tweet(tweet):
 
     return weight
 
-@cache
 def tweets_rank(days=7):
     try:
         days = int(days)
@@ -436,7 +435,7 @@ def inspect():
         tweets[i]['weight'] = weight_tweet(t)
     
     # crop the tweets to only some number of highest weight ones (for efficiency)
-    tweets.sort(reverse=True, key=lambda x: x['weight'])
+    tweets.sort(reverse=True, key=lambda x: x['weight']*x['votes'])
     if len(tweets) > max_tweet_records:
         tweets = tweets[:max_tweet_records]  
 
